@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">E_Business_EasyTask</string>
+    <string name="title_mytasks">Mytasks</string>
+    <string name="title_suche">Suche</string>
+    <string name="title_inbox">Inbox</string>
+    <string name="title_profile">Profile</string>
+    <string name="benutzername">Benutzername</string>
+    <string name="passwort">Passwort</string>
+    <string name="loginButton">Login</string>
+    <string name="easytask_name">EasyTask</string>
+</resources>
