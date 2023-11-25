@@ -2,6 +2,7 @@ package com.app.e_business_easytask;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     // Instanz der Datenbindungs-Klasse für die Aktivität
     private ActivityMainBinding binding;
     private TaskDataSource dataSource;
+    private Validator validator;
     private AlertDialog alertDialog;
 
     // Methode, die beim Erstellen der Aktivität aufgerufen wird
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
         dataSource = new TaskDataSource(this);
+        validator = new Validator(this);
     }
 
 
@@ -64,19 +67,22 @@ public class MainActivity extends AppCompatActivity {
             // Get the inflated view from the dialog
             View dialogView = alertDialog.findViewById(R.id.popup_create_task_layout);
             if (dialogView != null) {
-                // Hier sidn die eingegebenen Daten aus den EditText-Views
+                // Here are the entered data from the EditText-Views
+                Log.d("MainActivity", "Dialog view found");
 
-                String serviceType = ((EditText) findViewById(R.id.editTextServiceType)).getText().toString();
-                String jobDetails = ((EditText) findViewById(R.id.editTextJobDetails)).getText().toString();
+                String serviceType = ((EditText) dialogView.findViewById(R.id.editTextServiceType)).getText().toString();
+                String jobDetails = ((EditText) dialogView.findViewById(R.id.editTextJobDetails)).getText().toString();
+                Log.d("MainActivity", "ServiceType: " + serviceType);
+                Log.d("MainActivity", "JobDetails: " + jobDetails);
 
-                //Datum
-                DatePicker datePicker = findViewById(R.id.datePicker);
+                // Datum
+                DatePicker datePicker = dialogView.findViewById(R.id.datePicker);
                 int year = datePicker.getYear();
                 int month = datePicker.getMonth();
                 int day = datePicker.getDayOfMonth();
 
-                //Uhrzeit
-                TimePicker timePicker = findViewById(R.id.timePicker);
+                // Uhrzeit
+                TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
                 int hour;
                 int minute;
 
@@ -84,43 +90,57 @@ public class MainActivity extends AppCompatActivity {
                     hour = timePicker.getHour();
                     minute = timePicker.getMinute();
                 } else {
-                    // Für Versionen vor Android 6.0 (API-Level 23)
+                    // For versions before Android 6.0 (API-Level 23)
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                 }
+                Log.d("MainActivity", "TimePicker: " + timePicker);
 
-                // Datum und Uhrzeit Formatierung
-                String formattedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute);
+                // Datum separat speichern
+                String formattedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, day);
 
-                //Ort
-                String street = ((EditText) findViewById(R.id.editTextStreet)).getText().toString();
-                String house_number = ((EditText) findViewById(R.id.editTextHouseNumber)).getText().toString();
-                String zip_code = ((EditText) findViewById(R.id.editTextZipCode)).getText().toString();
+                // Uhrzeit separat speichern
+                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
+                Log.d("MainActivity", "formattedDate: " + formattedDate);
+                Log.d("MainActivity", "formattedTime: " + formattedTime);
+
+                // Ort
+                String street = ((EditText) dialogView.findViewById(R.id.editTextStreet)).getText().toString();
+                String houseNumber = ((EditText) dialogView.findViewById(R.id.editTextHouseNumber)).getText().toString();
+                String zipCode = ((EditText) dialogView.findViewById(R.id.editTextZipCode)).getText().toString();
+                Log.d("MainActivity", "street: " + street);
+                Log.d("MainActivity", "house_number: " + houseNumber);
+                Log.d("MainActivity", "zip_code: " + zipCode);
 
                 // Dauer des Auftrags
-                String durationText = ((EditText) findViewById(R.id.editTextDuration)).getText().toString();
+                String durationText = ((EditText) dialogView.findViewById(R.id.editTextDuration)).getText().toString();
                 int duration = Integer.parseInt(durationText);
-                String duration_unit = ((Spinner) findViewById(R.id.spinnerDurationUnit)).getSelectedItem().toString();
+                String durationUnit = ((Spinner) dialogView.findViewById(R.id.spinnerDurationUnit)).getSelectedItem().toString();
+                Log.d("MainActivity", "duration: " + duration);
+                Log.d("MainActivity", "duration_unit: " + durationUnit);
 
-                //budget
-                double budget = Double.parseDouble(((EditText) findViewById(R.id.editTextBudget)).getText().toString());
+                // Budget
+                double budget = Double.parseDouble(((EditText) dialogView.findViewById(R.id.editTextBudget)).getText().toString());
+                Log.d("MainActivity", "budget: " + budget);
 
-                // Daten in die Datenbank einfügen
-                dataSource.open(); // DB öffnen
-                dataSource.insertTask(serviceType, jobDetails, formattedDate, street, house_number, zip_code, duration, duration_unit, budget);
-                dataSource.close(); // DB schließen
+                if (validator.validateTask(serviceType, jobDetails, formattedDate, formattedTime,
+                        street, houseNumber, zipCode, durationText, durationUnit, String.valueOf(budget))) {
+                    // Daten in die Datenbank einfügen
+                    dataSource.open(); // DB öffnen
+                    dataSource.insertTask(serviceType, jobDetails, formattedDate, formattedTime, street, houseNumber, zipCode, duration, durationUnit, budget);
+                    dataSource.close(); // DB schließen
 
-                //Feedback an den Benutzer geben
-                Toast.makeText(this, "Auftrag gespeichert!", Toast.LENGTH_SHORT).show();
+                    // Feedback an den Benutzer geben
+                    Toast.makeText(this, "Auftrag erstellt!", Toast.LENGTH_SHORT).show();
 
-                alertDialog.dismiss();
-            } else {
-                // Handle the case where the inflated view is null
-                Toast.makeText(this, "Dialog view not found", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                } else {
+                    // Handle the case where the inflated view is null
+                    Toast.makeText(this, "Dialog view not found", Toast.LENGTH_SHORT).show();
+                }
             }
         }
-    }
-
+}
 
     public void onCancelClick(View view) {
         if (alertDialog != null) {
@@ -135,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
             dataSource.close(); // Beispiel: Schließe die Datenbankverbindung
         }
     }
-
+    public void onAddFilesClick(View view){
+        Toast.makeText(this, "Ihre ganzen Bilder wurden hinzugefügt!", Toast.LENGTH_SHORT).show();
+    }
 }
 
 

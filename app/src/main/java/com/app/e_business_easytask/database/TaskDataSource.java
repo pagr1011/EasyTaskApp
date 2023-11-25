@@ -22,11 +22,12 @@ public class TaskDataSource {
         dbHelper.close();
     }
 
-    public void insertTask(String serviceType, String jobDetails, String formattedDate, String street, String house_number, String zip_code, Integer duration, String duration_unit, double budget) {
+    public void insertTask(String serviceType, String jobDetails, String formattedDate, String formattedTime, String street, String house_number, String zip_code, Integer duration, String duration_unit, double budget) {
         ContentValues values = new ContentValues();
         values.put("service_type", serviceType);
         values.put("job_details", jobDetails);
         values.put("formattedDate", formattedDate);
+        values.put("formattedTime", formattedTime);
         values.put("street", street);
         values.put("house_number", house_number);
         values.put("zip_code", zip_code);
@@ -34,7 +35,6 @@ public class TaskDataSource {
         values.put("duration_unit", duration_unit);
         values.put("budget", budget);
 
-        //database.insert("tasks", null, values);
         long result = database.insert("tasks", null, values);
 
         if (result == -1) {

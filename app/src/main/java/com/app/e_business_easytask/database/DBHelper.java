@@ -21,8 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "service_type TEXT," +
                 "job_details TEXT," +
-                "date TEXT," +       // Spalte für das Datum
-                "time TEXT," +       // Spalte für die Uhrzeit
+                "formattedDate TEXT," +       // Spalte für das Datum
+                "formattedTime TEXT," +       // Spalte für die Uhrzeit
                 "street TEXT," +     // Weitere Spalten für den Standort
                 "house_number TEXT," +
                 "zip_code TEXT," +

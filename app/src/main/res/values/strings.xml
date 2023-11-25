@@ -11,4 +11,20 @@
     <string name="dienstleistungsart">Dienstleistungsart:</string>
     <string name="todo">TODO</string>
     <string name="service_typ_eingeben">Service Typ eingeben</string>
+    <string name="postleitzahl">Postleitzahl</string>
+    <string name="dauer_des_auftrags">Dauer des Auftrags:</string>
+    <string name="enter_job_duration">Enter job duration</string>
+    <string name="bilder_oder_dateien_anh_ngen">Bilder oder Dateien anhängen:</string>
+    <string name="dateien_hinzuf_gen">Dateien hinzufügen</string>
+    <string name="budget">Budget:</string>
+    <string name="enter_budget">Enter budget</string>
+    <string name="euro">€</string>
+    <string name="best_tigen">Bestätigen</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="hausnummer">Hausnummer</string>
+    <string name="strasse">Straße</string>
+    <string name="standort">Standort:</string>
+    <string name="datum_und_uhrzeit">Datum und Uhrzeit:</string>
+    <string name="enter_job_details">Enter job details</string>
+    <string name="auftragsdetails">Auftragsdetails:</string>
 </resources>
