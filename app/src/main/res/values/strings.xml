@@ -8,4 +8,7 @@
     <string name="passwort">Passwort</string>
     <string name="loginButton">Login</string>
     <string name="easytask_name">EasyTask</string>
+    <string name="dienstleistungsart">Dienstleistungsart:</string>
+    <string name="todo">TODO</string>
+    <string name="service_typ_eingeben">Service Typ eingeben</string>
 </resources>
