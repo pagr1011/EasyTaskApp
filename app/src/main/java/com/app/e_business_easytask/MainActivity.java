@@ -11,16 +11,15 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.app.e_business_easytask.database.TaskDataSource;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.app.e_business_easytask.database.TaskDataSource;
 import com.app.e_business_easytask.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;
 
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         // Hier öffne das Popup-Fenster
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_create_task, null);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
         alertDialog = builder.create(); // Hier wird die Instanzvariable aktualisiert

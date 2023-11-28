@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class Validator {
 
-    private Context context;
+    private final Context context;
 
     public Validator(Context context) {
         this.context = context;
@@ -42,9 +42,6 @@ public class Validator {
             showToast("Die Postleitzahl muss genau 5 Ziffern enthalten.");
             return false;
         }
-
-        // Weitere Validierungen nach Bedarf hinzufügen
-
         return true;
     }
 

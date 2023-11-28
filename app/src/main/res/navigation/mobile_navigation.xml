@@ -19,12 +19,12 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.app.e_business_easytask.ui.inbox.InboxFragment"
+        android:name="com.app.e_business_easytask.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_mytasks"
-        android:name="com.app.e_business_easytask.ui.inbox.InboxFragment"
+        android:name="com.app.e_business_easytask.ui.mytasks.MytasksFragment"
         android:label="@string/title_mytasks"
         tools:layout="@layout/fragment_mytasks" />
 </navigation>

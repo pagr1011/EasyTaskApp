@@ -27,4 +27,6 @@
     <string name="datum_und_uhrzeit">Datum und Uhrzeit:</string>
     <string name="enter_job_details">Enter job details</string>
     <string name="auftragsdetails">Auftragsdetails:</string>
+    <string name="stern">*</string>
+    <string name="mytasks">MyTasks</string>
 </resources>
