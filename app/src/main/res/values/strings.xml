@@ -29,4 +29,8 @@
     <string name="auftragsdetails">Auftragsdetails:</string>
     <string name="stern">*</string>
     <string name="mytasks">MyTasks</string>
+    <string name="easytaskTitle">EasyTask</string>
+    <string name="Start_title_description">zuverlässige und schnelle Vermittlung von Tasks.</string>
+    <string name="Start_Benutzer">Ich bin auf der Suche nach Taskern</string>
+    <string name="ich_m_chte_mich_als_tasker_anbieten">Ich möchte mich          als Tasker anbieten</string>
 </resources>

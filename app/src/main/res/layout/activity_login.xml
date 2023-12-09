@@ -1,50 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/white"
     android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="200dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/easytask_name"
-        android:src="@drawable/ic_mytasks_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:elevation="8dp"/>
 
     <ImageView
         android:id="@+id/secondLogoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/ic_addtask_grey"
+        app:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        app:elevation="8dp"
-        android:importantForAccessibility="no" />
+        tools:layout_editor_absoluteY="260dp" />
 
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:backgroundTint="#ffffff"
+        android:autofillHints=""
         android:hint="@string/benutzername"
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:textColor="#4a4a4a"
+        app:backgroundTint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/secondLogoImageView"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@id/secondLogoImageView" />
 
 
     <EditText
@@ -52,28 +40,71 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:backgroundTint="#50ffffff"
+        android:autofillHints=""
         android:hint="@string/passwort"
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="#4a4a4a"
+        app:backgroundTint="#50ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameEditText"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@id/usernameEditText" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:backgroundTint="#ffffff"
         android:text="@string/loginButton"
         android:textAllCaps="false"
         android:textColor="#009688"
+        app:backgroundTint="#ffffff"
+        app:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        app:elevation="8dp"/>
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+    <TextView
+        android:id="@+id/Start_Überschrift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:gravity="center_horizontal"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="EasyTask"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="94dp"
+        tools:shadowColor="#000000"
+        tools:shadowDx="2" />
+
+    <TextView
+        android:id="@+id/Start_Unterschirft"
+        android:layout_width="227dp"
+        android:layout_height="46dp"
+        android:gravity="center_horizontal"
+        android:text="zuverlässige und schnelle Vermittlung von Tasks."
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="156dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0E1B63"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="218dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
