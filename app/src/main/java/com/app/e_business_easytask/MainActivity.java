@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 if (validator.validateTask(serviceType, jobDetails, formattedDate, formattedTime,
                         street, houseNumber, zipCode, durationText, durationUnit, String.valueOf(budget))) {
                     // Daten in die Datenbank einfügen
-                    dataSource.open(); // DB öffnen
+                    dataSource.openWritableDB(); // DB öffnen
                     dataSource.insertTask(serviceType, jobDetails, formattedDate, formattedTime, street, houseNumber, zipCode, duration, durationUnit, budget);
                     dataSource.close(); // DB schließen
 
