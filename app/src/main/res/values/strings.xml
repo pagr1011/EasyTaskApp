@@ -16,7 +16,7 @@
     <string name="enter_job_duration">Enter job duration</string>
     <string name="bilder_oder_dateien_anh_ngen">Bilder oder Dateien anhängen:</string>
     <string name="dateien_hinzuf_gen">Dateien hinzufügen</string>
-    <string name="budget">Budget:</string>
+    <string name="budgetangabe">Budget:</string>
     <string name="enter_budget">Enter budget</string>
     <string name="euro">€</string>
     <string name="best_tigen">Bestätigen</string>
@@ -29,4 +29,20 @@
     <string name="auftragsdetails">Auftragsdetails:</string>
     <string name="stern">*</string>
     <string name="mytasks">MyTasks</string>
+    <string name="service_type">Service Type: %1$s</string>
+    <string name="job_details">Job Details: %1$s</string>
+    <string name="date">Date: %1$s</string>
+    <string name="time">Time: %1$s</string>
+    <string name="street">Street: %1$s</string>
+    <string name="house_number">House Number: %1$s</string>
+    <string name="zip_code">Zip Code: %1$s</string>
+    <string name="duration">Duration: %1$d %2$s</string>
+    <string name="budget">Budget: $%1$.2f</string>
+    <string name="task">Task</string>
+    <string name="sie_haben_4_ungelesene_nachrichten">Sie haben 4 ungelesene Nachrichten</string>
+    <string name="hallo_message_1">QuantumPenguin88: Hallo ich wollte fragen ob es möglich ist, dass Sie um 14 Uhr bei mir sind?</string>
+    <string name="antwort_hier_eingeben">Antwort hier eingeben</string>
+    <string name="als_ungelesen_markieren">Als ungelesen markieren</string>
+    <string name="antworten">Antworten</string>
+    <string name="hey_message_2">StarlightGazer42: Hey 20€ für den Job sind echt wenig. Können wir uns auf 35 einigen?</string>
 </resources>

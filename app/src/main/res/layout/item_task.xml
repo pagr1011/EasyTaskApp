@@ -1,0 +1,77 @@
+<!-- item_task.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/default_task_icon"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/task" />
+
+    <!-- TextView für Service Type -->
+    <TextView
+        android:id="@+id/textViewServiceType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <!-- Weitere TextViews für andere Aufgabeninformationen -->
+    <TextView
+        android:id="@+id/textViewJobDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewFormattedDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewFormattedTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewHouseNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewZipCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/textViewBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <!-- Füge weitere Views nach Bedarf hinzu -->
+
+</LinearLayout>
