@@ -12,24 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.E_Business_EasyTask"
         tools:targetApi="31">
-
-        <!-- Setzen Sie LoginActivity als Hauptaktivität -->
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name"
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Fügen Sie die MainActivity hinzu -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
