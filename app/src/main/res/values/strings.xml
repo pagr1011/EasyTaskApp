@@ -57,4 +57,8 @@
     <string name="farbe_auswahl">Farbe auswählen</string>
     <string name="elektronik">Elektronik</string>
     <string name="hausbau">Hausbau</string>
+    <string name="tasks_i_accepted">Tasks I Accepted</string>
+    <string name="historie_anzeigen">Historie anzeigen</string>
+    <string name="tasks_i_created">Tasks I Created</string>
+    <string name="klicken_sie_an_um_die_informationen_anzuzeigen">Klicken Sie an, um alle Informationen anzuzeigen</string>
 </resources>
