@@ -6,17 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.suche.SucheFragment">
 
-    <TextView
-        android:id="@+id/text_suche"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp">
+
+        <ImageView
+            android:id="@+id/imageViewSuche"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_suche_blue" />
+
+        <EditText
+            android:id="@+id/editTextSuche"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/imageViewFilter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="onSearchFilterClick"
+            app:srcCompat="@drawable/ic_filter_alt_light" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
