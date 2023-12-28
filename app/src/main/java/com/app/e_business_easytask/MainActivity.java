@@ -60,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void onSearchFilterClick(View view) {
+        // Hier öffne das Popup-Fenster
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.popup_filter_suche, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        alertDialog = builder.create(); // Hier wird die Instanzvariable aktualisiert
+        alertDialog.show();
+    }
+
     public void onConfirmClick(View view) {
         if (alertDialog != null) {
             // Get the inflated view from the dialog
