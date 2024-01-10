@@ -18,14 +18,8 @@
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="20dp">
 
-        <ImageView
-            android:id="@+id/imageViewSuche"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_suche_blue" />
-
-        <EditText
-            android:id="@+id/editTextSuche"
+        <SearchView
+            android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
