@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Erstellen eines Auftrags (Grigorios)
+    //Erstellen eines Auftrags
     public void onCreateTaskClick(View view) {
         // Hier öffne das Popup-Fenster
         LayoutInflater inflater = getLayoutInflater();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchFilterClick(View view) {
-        // Hier öffne das Popup-Fenster
+        // Hier öffnet das Popup-Fenster
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_filter_suche, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             // Get the inflated view from the dialog
             View dialogView = alertDialog.findViewById(R.id.popup_create_task_layout);
             if (dialogView != null) {
-                // Here are the entered data from the EditText-Views
+                // Hier sind die Eingabedaten aus den EditText-Views
                 Log.d("MainActivity", "Dialog view found");
 
                 String serviceType = ((EditText) dialogView.findViewById(R.id.editTextServiceType)).getText().toString();
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                     hour = timePicker.getHour();
                     minute = timePicker.getMinute();
                 } else {
-                    // For versions before Android 6.0 (API-Level 23)
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                 }
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
                     alertDialog.dismiss();
                 } else {
-                    // Handle the case where the inflated view is null
+                    // Wenn die inflated view null ist dann soll der Text ausgegeben werden
                     Toast.makeText(this, "Dialog view not found", Toast.LENGTH_SHORT).show();
                 }
             }

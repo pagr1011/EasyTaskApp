@@ -25,48 +25,49 @@ public class MytasksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Die Methode, die die Ansicht für dieses Fragment erstellt
         View view = inflater.inflate(R.layout.fragment_mytasks, container, false);
 
-        // Initialize RecyclerView and adapters
+        // Initialisiert die RecyclerView und die Adapter
         RecyclerView createdTasksRecyclerView = view.findViewById(R.id.recycler_created_tasks);
         createdTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         createdTasksAdapter = new TaskAdapter();
         createdTasksRecyclerView.setAdapter(createdTasksAdapter);
 
-        // Set the icon click listener in the adapter
         createdTasksAdapter.setOnItemClickListener(this::showTaskDetailsPopup);
         createdTasksRecyclerView.setAdapter(createdTasksAdapter);
         setupItemClick();
 
-        // Initialize data source
+        // Initialisiert die Datenquelle
         taskDataSource = new TaskDataSource(getContext());
         taskDataSource.open();
 
+        // Protokolliert alle Aufgaben aus der Datenbank
         taskDataSource.logAllTasks();
 
-        // Load data from the database and set it in the adapter
+        // Lädt Daten aus der Datenbank und setzt sie im Adapter
         List<Task> createdTasks = taskDataSource.getAllTasks();
         Log.d("MytasksFragment", "Number of tasks loaded from database: " + createdTasks.size());
         createdTasksAdapter.setTaskList(createdTasks);
-
-        // Set the icon click listener in the adapter
         return view;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Close the data source when the fragment is destroyed
+        // Schließt die Datenquelle, wenn das Fragment zerstört wird
         taskDataSource.close();
     }
 
-    // Add this method to handle item clicks
+    // Methode zum Behandeln von Klicks auf Listenelemente
     private void setupItemClick() {
         createdTasksAdapter.setOnItemClickListener(this::showTaskDetailsPopup);
     }
+
+    // Methode zum Anzeigen des Popups mit den Aufgabendetails
     private void showTaskDetailsPopup(Task task) {
-        // Open the TaskDetailsDialogFragment
+        // Öffnet das TaskDetailsDialogFragment
         TaskDetailsDialogFragment dialogFragment = new TaskDetailsDialogFragment(task);
         dialogFragment.show(getChildFragmentManager(), "task_details");
     }
