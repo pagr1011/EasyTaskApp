@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">E_Business_EasyTask</string>
+    <string name="app_name">EasyTask</string>
     <string name="title_mytasks">Mytasks</string>
     <string name="title_suche">Suche</string>
     <string name="title_inbox">Inbox</string>
