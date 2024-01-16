@@ -1,5 +1,6 @@
 package com.app.e_business_easytask.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -63,8 +64,50 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_BENUTZER);
         db.execSQL(CREATE_TABLE_DIENSTLEISTER);
         db.execSQL(CREATE_TABLE_TASKS);
-
+        //insertMockData(db);
     }
+
+    /*private void insertMockData(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+
+        values.put("service_type", "Rasenmaehen");
+        values.put("job_details", "Rasenmaehen am Sonntag");
+        values.put("formattedDate", "2024-01-21");
+        values.put("formattedTime", "11:01");
+        values.put("street", "Musterstrasse");
+        values.put("house_number", "1");
+        values.put("zip_code", "12345");
+        values.put("duration", 30);
+        values.put("duration_unit", "Minutes");
+        values.put("budget", 20.0);
+        db.insert("Benutzer", null, values);
+
+        values.clear();
+        values.put("service_type", "Malerarbeiten");
+        values.put("job_details", "Lattenzaun streichen");
+        values.put("formattedDate", "2024-01-19");
+        values.put("formattedTime", "12:00");
+        values.put("street", "Haupstrasse");
+        values.put("house_number", "2");
+        values.put("zip_code", "12345");
+        values.put("duration", 90);
+        values.put("duration_unit", "Minutes");
+        values.put("budget", 30.0);
+        db.insert("Benutzer", null, values);
+
+        values.clear();
+        values.put("service_type", "Haushaltsreparaturen");
+        values.put("job_details", "Waschbecken reparieren");
+        values.put("formattedDate", "2024-01-20");
+        values.put("formattedTime", "18:00");
+        values.put("street", "Nebenstrasse");
+        values.put("house_number", "3");
+        values.put("zip_code", "12345");
+        values.put("duration", 120);
+        values.put("duration_unit", "Minutes");
+        values.put("budget", 50.0);
+        db.insert("Benutzer", null, values);
+    }*/
 
 
     @Override
