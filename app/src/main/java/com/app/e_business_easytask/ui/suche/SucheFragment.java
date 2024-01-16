@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,41 +25,45 @@ public class SucheFragment extends Fragment {
     private TaskAdapter tasksAdapter;
     private TaskDataSource taskDataSource;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    // Hier eine Liste für alle Mock-Ergebnisse erstellen
+    private List<Task> allMockTasks;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_suche, container, false);
 
-        RecyclerView existingTasksRecyclerView = view.findViewById(R.id.recycler_existing_tasks);
-        existingTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
         RecyclerView searchedTasksRecyclerView = view.findViewById(R.id.recycler_searched_tasks);
-        searchedTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        searchedTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // RecyclerView für alle Mock-Ergebnisse
+        RecyclerView existingTasksRecyclerView = view.findViewById(R.id.recycler_existing_tasks);
+        existingTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         SearchView searchView = view.findViewById(R.id.search_bar);
 
         tasksAdapter = new TaskAdapter();
-        existingTasksRecyclerView.setAdapter(tasksAdapter);
         searchedTasksRecyclerView.setAdapter(tasksAdapter);
 
-        // Set the icon click listener in the adapter
-        tasksAdapter.setOnItemClickListener(this::showTaskDetailsPopup);
-        existingTasksRecyclerView.setAdapter(tasksAdapter);
-        searchedTasksRecyclerView.setAdapter(tasksAdapter);
-        setupItemClick();
+        // Adapter für alle Mock-Ergebnisse
+        TaskAdapter existingTasksAdapter = new TaskAdapter();
+        existingTasksRecyclerView.setAdapter(existingTasksAdapter);
 
         taskDataSource = new TaskDataSource(getContext());
         taskDataSource.open();
 
-        List<Task> existingTasks = taskDataSource.getAllTasks();
-        tasksAdapter.setTaskList(existingTasks);
+        // Alle Mock-Ergebnisse laden und in der RecyclerView anzeigen
+        allMockTasks = taskDataSource.getAllMockTasks();
+        existingTasksAdapter.setTaskList(allMockTasks);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                existingTasksRecyclerView.setVisibility(View.GONE);
+                // Sichtbarkeitseinstellungen
                 searchedTasksRecyclerView.setVisibility(View.VISIBLE);
+                existingTasksRecyclerView.setVisibility(View.GONE);
 
-                List<Task> searchedTasks = taskDataSource.getSearchedTasks(query);
+                // Suche nach Mock-Daten in der Datenbank
+                List<Task> searchedTasks = taskDataSource.getSearchedMockTasks(query);
                 tasksAdapter.setTaskList(searchedTasks);
 
                 return true;
@@ -66,7 +71,15 @@ public class SucheFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                // Echtzeit-Suche
+                List<Task> realTimeSearchResults = taskDataSource.getRealTimeSearchResults(newText);
+                tasksAdapter.setTaskList(realTimeSearchResults);
+
+                // Zeige die Ergebnisse in der searchedTasksRecyclerView an
+                searchedTasksRecyclerView.setVisibility(View.VISIBLE);
+                existingTasksRecyclerView.setVisibility(View.GONE);
+
+                return true;
             }
         });
 
@@ -77,14 +90,25 @@ public class SucheFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         taskDataSource.close();
+        allMockTasks = null;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupItemClick();
+
     }
 
     private void setupItemClick() {
         tasksAdapter.setOnItemClickListener(this::showTaskDetailsPopup);
     }
+
     private void showTaskDetailsPopup(Task task) {
-        // Open the TaskDetailsDialogFragment
-        TaskDetailsDialogFragment dialogFragment = new TaskDetailsDialogFragment(task);
-        dialogFragment.show(getChildFragmentManager(), "task_details");
+        if (task != null) {
+            TaskDetailsDialogFragment dialogFragment = new TaskDetailsDialogFragment(task);
+            dialogFragment.show(getChildFragmentManager(), "task_details");
+        }
     }
+
 }

@@ -59,9 +59,9 @@
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_height="471dp"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <TextView

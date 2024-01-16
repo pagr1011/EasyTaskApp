@@ -17,29 +17,28 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="20dp">
-
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text" />
-
         <ImageView
             android:id="@+id/imageViewFilter"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:onClick="onSearchFilterClick"
-            app:srcCompat="@drawable/ic_filter_alt_light" />
+            app:srcCompat="@drawable/ic_filter_alt_light"
+            android:contentDescription="@string/todo" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/suche_layout"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/suche_layout"
         tools:layout_editor_absoluteY="80dp">
 
         <LinearLayout
@@ -52,22 +51,22 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_existing_tasks"
                 android:layout_width="match_parent"
-                android:layout_height="143dp"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/anzeigen_layout"/>
+                app:layout_constraintTop_toBottomOf="@id/anzeigen_layout" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_searched_tasks"
-                android:layout_width="match_parent"
-                android:layout_height="143dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/anzeigen_layout"/>
+                app:layout_constraintTop_toBottomOf="@id/anzeigen_layout" />
         </LinearLayout>
 
 

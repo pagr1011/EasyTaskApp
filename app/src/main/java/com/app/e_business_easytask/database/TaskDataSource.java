@@ -18,6 +18,7 @@ public class TaskDataSource {
 
     private SQLiteDatabase database;
     private final DBHelper dbHelper;
+    private List<Task> allMockTasks = new ArrayList<>();
 
     public TaskDataSource(Context context) {
         dbHelper = new DBHelper(context);
@@ -142,87 +143,6 @@ public class TaskDataSource {
 
         return taskList;
     }
-
-    public List<Task> getSearchedTasks(String search) {
-        List<Task> taskList = new ArrayList<>();
-
-        Cursor cursor = database.query(
-                "tasks",
-                new String[]{"id", "service_type", "job_details", "formattedDate", "formattedTime", "street", "house_number", "zip_code", "duration", "duration_unit", "budget"},
-                "service_type = ?",
-                new String[]{search},
-                null, null, null
-        );
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int idColumnIndex = cursor.getColumnIndex("id");
-            int serviceTypeColumnIndex = cursor.getColumnIndex("service_type");
-            int jobDetailsColumnIndex = cursor.getColumnIndex("job_details");
-            int formattedDateColumnIndex = cursor.getColumnIndex("formattedDate");
-            int formattedTimeColumnIndex = cursor.getColumnIndex("formattedTime");
-            int streetColumnIndex = cursor.getColumnIndex("street");
-            int houseNumberColumnIndex = cursor.getColumnIndex("house_number");
-            int zipCodeColumnIndex = cursor.getColumnIndex("zip_code");
-            int durationColumnIndex = cursor.getColumnIndex("duration");
-            int durationUnitColumnIndex = cursor.getColumnIndex("duration_unit");
-            int budgetColumnIndex = cursor.getColumnIndex("budget");
-
-            while (cursor.moveToNext()) {
-                Task task = new Task();
-
-                if (idColumnIndex >= 0) {
-                    task.setId(cursor.getLong(idColumnIndex));
-                }
-
-                if (serviceTypeColumnIndex >= 0) {
-                    task.setServiceType(cursor.getString(serviceTypeColumnIndex));
-                }
-
-                if (jobDetailsColumnIndex >= 0) {
-                    task.setJobDetails(cursor.getString(jobDetailsColumnIndex));
-                }
-
-                if (formattedDateColumnIndex >= 0) {
-                    task.setFormattedDate(cursor.getString(formattedDateColumnIndex));
-                }
-
-                if (formattedTimeColumnIndex >= 0) {
-                    task.setFormattedTime(cursor.getString(formattedTimeColumnIndex));
-                }
-
-                if (streetColumnIndex >= 0) {
-                    task.setStreet(cursor.getString(streetColumnIndex));
-                }
-
-                if (houseNumberColumnIndex >= 0) {
-                    task.setHouseNumber(cursor.getString(houseNumberColumnIndex));
-                }
-
-                if (zipCodeColumnIndex >= 0) {
-                    task.setZipCode(cursor.getString(zipCodeColumnIndex));
-                }
-
-                if (durationColumnIndex >= 0) {
-                    task.setDuration(cursor.getInt(durationColumnIndex));
-                }
-
-                if (durationUnitColumnIndex >= 0) {
-                    task.setDurationUnit(cursor.getString(durationUnitColumnIndex));
-                }
-
-                if (budgetColumnIndex >= 0) {
-                    task.setBudget(cursor.getDouble(budgetColumnIndex));
-                }
-
-                taskList.add(task);
-            }
-
-            cursor.close();
-        }
-
-        return taskList;
-    }
-
 
     public Long insertBenutzer(String vorname, String nachname, String email, String passwort, String telefonnummer, String ort, String plz, String strasse, String hausnummer, String user_type) {
         long adresse_id = insertAdresse(ort, plz, strasse, hausnummer);
@@ -376,4 +296,175 @@ public class TaskDataSource {
 
         return adresse;
     }
+
+    public List<Task> getAllMockTasks() {
+        List<Task> taskList = new ArrayList<>();
+
+        Cursor cursor = database.query(
+                "tasks",
+                new String[]{"id", "service_type", "job_details", "formattedDate", "formattedTime", "street", "house_number", "zip_code", "duration", "duration_unit", "budget"},
+                null, // keine Einschränkung, um alle Aufgaben abzurufen
+                null, null, null, null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idColumnIndex = cursor.getColumnIndex("id");
+            int serviceTypeColumnIndex = cursor.getColumnIndex("service_type");
+            int jobDetailsColumnIndex = cursor.getColumnIndex("job_details");
+            int formattedDateColumnIndex = cursor.getColumnIndex("formattedDate");
+            int formattedTimeColumnIndex = cursor.getColumnIndex("formattedTime");
+            int streetColumnIndex = cursor.getColumnIndex("street");
+            int houseNumberColumnIndex = cursor.getColumnIndex("house_number");
+            int zipCodeColumnIndex = cursor.getColumnIndex("zip_code");
+            int durationColumnIndex = cursor.getColumnIndex("duration");
+            int durationUnitColumnIndex = cursor.getColumnIndex("duration_unit");
+            int budgetColumnIndex = cursor.getColumnIndex("budget");
+
+            do {
+                Task task = new Task();
+
+                if (idColumnIndex >= 0) {
+                    task.setId(cursor.getLong(idColumnIndex));
+                }
+
+                if (serviceTypeColumnIndex >= 0) {
+                    task.setServiceType(cursor.getString(serviceTypeColumnIndex));
+                }
+
+                if (jobDetailsColumnIndex >= 0) {
+                    task.setJobDetails(cursor.getString(jobDetailsColumnIndex));
+                }
+
+                if (formattedDateColumnIndex >= 0) {
+                    task.setFormattedDate(cursor.getString(formattedDateColumnIndex));
+                }
+
+                if (formattedTimeColumnIndex >= 0) {
+                    task.setFormattedTime(cursor.getString(formattedTimeColumnIndex));
+                }
+
+                if (streetColumnIndex >= 0) {
+                    task.setStreet(cursor.getString(streetColumnIndex));
+                }
+
+                if (houseNumberColumnIndex >= 0) {
+                    task.setHouseNumber(cursor.getString(houseNumberColumnIndex));
+                }
+
+                if (zipCodeColumnIndex >= 0) {
+                    task.setZipCode(cursor.getString(zipCodeColumnIndex));
+                }
+
+                if (durationColumnIndex >= 0) {
+                    task.setDuration(cursor.getInt(durationColumnIndex));
+                }
+
+                if (durationUnitColumnIndex >= 0) {
+                    task.setDurationUnit(cursor.getString(durationUnitColumnIndex));
+                }
+
+                if (budgetColumnIndex >= 0) {
+                    task.setBudget(cursor.getDouble(budgetColumnIndex));
+                }
+
+                taskList.add(task);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return taskList;
+    }
+    public List<Task> getRealTimeSearchResults(String search) {
+        // Implementieren Sie eine Methode, um in Echtzeit zu suchen
+        // Sie können hier die Logik für die Echtzeit-Suche hinzufügen
+        // Beispiel: Durchsuchen Sie eine Liste von Ergebnissen basierend auf dem aktuellen Suchbegriff
+        List<Task> realTimeSearchResults = new ArrayList<>();
+        for (Task task : allMockTasks) {
+            if (task.getServiceType().toLowerCase().contains(search.toLowerCase())) {
+                realTimeSearchResults.add(task);
+            }
+        }
+        return realTimeSearchResults;
+    }
+    public List<Task> getSearchedMockTasks(String search) {
+        List<Task> taskList = new ArrayList<>();
+
+        Cursor cursor = database.query(
+                "tasks",
+                new String[]{"id", "service_type", "job_details", "formattedDate", "formattedTime", "street", "house_number", "zip_code", "duration", "duration_unit", "budget"},
+                "service_type LIKE ?",
+                new String[]{"%" + search + "%"},
+                null, null, null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idColumnIndex = cursor.getColumnIndex("id");
+            int serviceTypeColumnIndex = cursor.getColumnIndex("service_type");
+            int jobDetailsColumnIndex = cursor.getColumnIndex("job_details");
+            int formattedDateColumnIndex = cursor.getColumnIndex("formattedDate");
+            int formattedTimeColumnIndex = cursor.getColumnIndex("formattedTime");
+            int streetColumnIndex = cursor.getColumnIndex("street");
+            int houseNumberColumnIndex = cursor.getColumnIndex("house_number");
+            int zipCodeColumnIndex = cursor.getColumnIndex("zip_code");
+            int durationColumnIndex = cursor.getColumnIndex("duration");
+            int durationUnitColumnIndex = cursor.getColumnIndex("duration_unit");
+            int budgetColumnIndex = cursor.getColumnIndex("budget");
+
+            do {
+                Task task = new Task();
+
+                if (idColumnIndex >= 0) {
+                    task.setId(cursor.getLong(idColumnIndex));
+                }
+
+                if (serviceTypeColumnIndex >= 0) {
+                    task.setServiceType(cursor.getString(serviceTypeColumnIndex));
+                }
+
+                if (jobDetailsColumnIndex >= 0) {
+                    task.setJobDetails(cursor.getString(jobDetailsColumnIndex));
+                }
+
+                if (formattedDateColumnIndex >= 0) {
+                    task.setFormattedDate(cursor.getString(formattedDateColumnIndex));
+                }
+
+                if (formattedTimeColumnIndex >= 0) {
+                    task.setFormattedTime(cursor.getString(formattedTimeColumnIndex));
+                }
+
+                if (streetColumnIndex >= 0) {
+                    task.setStreet(cursor.getString(streetColumnIndex));
+                }
+
+                if (houseNumberColumnIndex >= 0) {
+                    task.setHouseNumber(cursor.getString(houseNumberColumnIndex));
+                }
+
+                if (zipCodeColumnIndex >= 0) {
+                    task.setZipCode(cursor.getString(zipCodeColumnIndex));
+                }
+
+                if (durationColumnIndex >= 0) {
+                    task.setDuration(cursor.getInt(durationColumnIndex));
+                }
+
+                if (durationUnitColumnIndex >= 0) {
+                    task.setDurationUnit(cursor.getString(durationUnitColumnIndex));
+                }
+
+                if (budgetColumnIndex >= 0) {
+                    task.setBudget(cursor.getDouble(budgetColumnIndex));
+                }
+
+                taskList.add(task);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return taskList;
+    }
+
 }

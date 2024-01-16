@@ -2,13 +2,16 @@ package com.app.e_business_easytask.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "EasyTaskDB";
     private static final int DATABASE_VERSION = 2;
+
 
     // Benutzer-Tabelle
     private static final String CREATE_TABLE_BENUTZER = "CREATE TABLE IF NOT EXISTS Benutzer (" +
@@ -55,6 +58,70 @@ public class DBHelper extends SQLiteOpenHelper {
     // Konstruktor
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        // Überprüfe, ob die Mock-Daten bereits eingefügt wurden
+        if (isFirstRun(context)) {
+            insertMockData();
+            markFirstRunDone(context);
+        }
+    }
+
+    private boolean isFirstRun(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return preferences.getBoolean("FirstRun", true);
+    }
+
+    private void markFirstRunDone(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("FirstRun", false);
+        editor.apply();
+    }
+
+    // Restlicher Code bleibt unverändert...
+
+    private void insertMockData() {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            db.beginTransaction();
+
+            // Erstelle Tabellen in der richtigen Reihenfolge
+            db.execSQL(CREATE_TABLE_ADRESSE);
+            db.execSQL(CREATE_TABLE_BENUTZER);
+            db.execSQL(CREATE_TABLE_DIENSTLEISTER);
+            db.execSQL(CREATE_TABLE_TASKS);
+
+            // Füge Mock-Daten ein
+            insertTask(db, "Cleaning", "Clean the house", "2024-01-17", "10:00 AM", "Sample Street", "123", "12345", 60, "minutes", 50.0);
+            insertTask(db, "Gardening", "Water the plants", "2024-01-18", "02:00 PM", "Garden Street", "456", "56789", 45, "minutes", 30.0);
+
+            db.setTransactionSuccessful();
+            Log.d("DBHelper", "Mock data insertion completed.");
+        } catch (Exception e) {
+            Log.e("DBHelper", "Error inserting mock data into the database.", e);
+        } finally {
+            db.endTransaction();
+        }
+    }
+    public void insertTask(SQLiteDatabase db, String serviceType, String jobDetails, String formattedDate, String formattedTime, String street, String house_number, String zip_code, Integer duration, String duration_unit, double budget) {
+        ContentValues values = new ContentValues();
+        values.put("service_type", serviceType);
+        values.put("job_details", jobDetails);
+        values.put("formattedDate", formattedDate);
+        values.put("formattedTime", formattedTime);
+        values.put("street", street);
+        values.put("house_number", house_number);
+        values.put("zip_code", zip_code);
+        values.put("duration", duration);
+        values.put("duration_unit", duration_unit);
+        values.put("budget", budget);
+
+        long result = db.insert("tasks", null, values);
+
+        if (result == -1) {
+            Log.e("DBHelper", "Error inserting task into the database.");
+        } else {
+            Log.d("DBHelper", "Task successfully inserted into the database. ID: " + result);
+        }
     }
 
     @Override
@@ -64,52 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_BENUTZER);
         db.execSQL(CREATE_TABLE_DIENSTLEISTER);
         db.execSQL(CREATE_TABLE_TASKS);
-        //insertMockData(db);
     }
-
-    /*private void insertMockData(SQLiteDatabase db) {
-        ContentValues values = new ContentValues();
-
-        values.put("service_type", "Rasenmaehen");
-        values.put("job_details", "Rasenmaehen am Sonntag");
-        values.put("formattedDate", "2024-01-21");
-        values.put("formattedTime", "11:01");
-        values.put("street", "Musterstrasse");
-        values.put("house_number", "1");
-        values.put("zip_code", "12345");
-        values.put("duration", 30);
-        values.put("duration_unit", "Minutes");
-        values.put("budget", 20.0);
-        db.insert("Benutzer", null, values);
-
-        values.clear();
-        values.put("service_type", "Malerarbeiten");
-        values.put("job_details", "Lattenzaun streichen");
-        values.put("formattedDate", "2024-01-19");
-        values.put("formattedTime", "12:00");
-        values.put("street", "Haupstrasse");
-        values.put("house_number", "2");
-        values.put("zip_code", "12345");
-        values.put("duration", 90);
-        values.put("duration_unit", "Minutes");
-        values.put("budget", 30.0);
-        db.insert("Benutzer", null, values);
-
-        values.clear();
-        values.put("service_type", "Haushaltsreparaturen");
-        values.put("job_details", "Waschbecken reparieren");
-        values.put("formattedDate", "2024-01-20");
-        values.put("formattedTime", "18:00");
-        values.put("street", "Nebenstrasse");
-        values.put("house_number", "3");
-        values.put("zip_code", "12345");
-        values.put("duration", 120);
-        values.put("duration_unit", "Minutes");
-        values.put("budget", 50.0);
-        db.insert("Benutzer", null, values);
-    }*/
-
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Adresse;");
@@ -118,4 +140,5 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS tasks;");
         onCreate(db);
     }
+
 }
