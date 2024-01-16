@@ -8,6 +8,10 @@ import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.content.Intent;
+import android.widget.Button;
+
+import com.app.e_business_easytask.FeedbackActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +101,13 @@ public class SucheFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupItemClick();
+
+        Button btnFeedback = view.findViewById(R.id.btnFeedback);
+        btnFeedback.setOnClickListener(v -> {
+            // Hier öffnet sich die FeedbackActivity
+            Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+            startActivity(intent);
+        });
 
     }
 
