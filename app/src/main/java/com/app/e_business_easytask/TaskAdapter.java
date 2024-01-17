@@ -38,7 +38,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         notifyDataSetChanged();
     }
 
-    public static class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView textViewServiceType;
         private final TextView textViewJobDetails;
         private final TextView textViewFormattedDate;
@@ -52,7 +52,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // Initialize your Views for each element
+            // Initialisiert jedes Element zu den entsprechenden Views
             textViewServiceType = itemView.findViewById(R.id.textViewServiceType);
             textViewJobDetails = itemView.findViewById(R.id.textViewJobDetails);
             textViewFormattedDate = itemView.findViewById(R.id.textViewFormattedDate);
@@ -63,9 +63,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             textViewDuration = itemView.findViewById(R.id.textViewDuration);
             textViewBudget = itemView.findViewById(R.id.textViewBudget);
 
-            // Set the click listener
+            // clicklistener setzen
             itemView.setOnClickListener(this);
         }
+
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -77,7 +78,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
         public void bind(Task task) {
-            // Set the Task data in the Views
+            // Task data in die Views einsetzten
             textViewServiceType.setText(itemView.getContext().getString(R.string.service_type, task.getServiceType()));
             textViewJobDetails.setText(itemView.getContext().getString(R.string.job_details, task.getJobDetails()));
             textViewFormattedDate.setText(itemView.getContext().getString(R.string.date, task.getFormattedDate()));

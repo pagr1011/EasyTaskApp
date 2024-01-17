@@ -42,6 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "nr TEXT" +
             ");";
 
+    // Task Tabelle
     private static final String CREATE_TABLE_TASKS = "CREATE TABLE tasks (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "service_type TEXT," +
@@ -58,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Konstruktor
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        // Überprüfe, ob die Mock-Daten bereits eingefügt wurden
+        // Überprüft, ob die Mock-Daten bereits eingefügt wurden
         if (isFirstRun(context)) {
             insertMockData();
             markFirstRunDone(context);
@@ -77,20 +78,18 @@ public class DBHelper extends SQLiteOpenHelper {
         editor.apply();
     }
 
-    // Restlicher Code bleibt unverändert...
-
     private void insertMockData() {
         SQLiteDatabase db = getWritableDatabase();
         try {
             db.beginTransaction();
 
-            // Erstelle Tabellen in der richtigen Reihenfolge
+            // Erstellt Tabellen in der richtigen Reihenfolge
             db.execSQL(CREATE_TABLE_ADRESSE);
             db.execSQL(CREATE_TABLE_BENUTZER);
             db.execSQL(CREATE_TABLE_DIENSTLEISTER);
             db.execSQL(CREATE_TABLE_TASKS);
 
-            // Füge Mock-Daten ein
+            // Fügt Mock-Daten ein
             insertTask(db, "Cleaning", "Clean the house", "2024-01-17", "10:00 AM", "Sample Street", "123", "12345", 60, "minutes", 50.0);
             insertTask(db, "Gardening", "Water the plants", "2024-01-18", "02:00 PM", "Garden Street", "456", "56789", 45, "minutes", 30.0);
 
@@ -102,6 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
+
     public void insertTask(SQLiteDatabase db, String serviceType, String jobDetails, String formattedDate, String formattedTime, String street, String house_number, String zip_code, Integer duration, String duration_unit, double budget) {
         ContentValues values = new ContentValues();
         values.put("service_type", serviceType);
@@ -132,6 +132,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_DIENSTLEISTER);
         db.execSQL(CREATE_TABLE_TASKS);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Adresse;");

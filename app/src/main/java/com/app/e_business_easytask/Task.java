@@ -115,7 +115,7 @@ public class Task {
         return Objects.hash(id, serviceType, jobDetails, formattedDate, formattedTime, street, houseNumber, zipCode, duration, durationUnit, budget);
     }
 
-    // Equalsmethoden für die Verwendung in Sammlungen
+    // Equalsmethoden für die Verwendung in Collections
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

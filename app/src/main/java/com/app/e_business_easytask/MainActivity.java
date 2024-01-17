@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private Validator validator;
     private AlertDialog alertDialog;
 
-    // Methode, die beim Erstellen der Aktivität aufgerufen wird
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Erstellen eines Auftrags
     public void onCreateTaskClick(View view) {
-        // Hier öffne das Popup-Fenster
+        // Hier öffnet sich das Popup-Fenster
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_create_task, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchFilterClick(View view) {
-        // Hier öffnet das Popup-Fenster
+        // Hier öffnet sich das Popup-Fenster
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_filter_suche, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onConfirmClick(View view) {
         if (alertDialog != null) {
-            // Get the inflated view from the dialog
+            // Inflated View erhalten
             View dialogView = alertDialog.findViewById(R.id.popup_create_task_layout);
             if (dialogView != null) {
                 // Hier sind die Eingabedaten aus den EditText-Views
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-}
+    }
 
     public void onCancelClick(View view) {
         if (alertDialog != null) {
@@ -159,10 +158,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (dataSource != null) {
-            dataSource.close(); // Beispiel: Schließe die Datenbankverbindung
+            dataSource.close();
         }
     }
-    public void onAddFilesClick(View view){
+
+    public void onAddFilesClick(View view) {
         Toast.makeText(this, "Ihre ganzen Bilder wurden hinzugefügt!", Toast.LENGTH_SHORT).show();
     }
 }

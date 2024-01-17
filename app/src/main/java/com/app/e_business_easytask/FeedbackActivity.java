@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class FeedbackActivity extends AppCompatActivity {
@@ -30,8 +31,6 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String feedback = feedbackText.getText().toString();
                 float rating = ratingBar.getRating();
-
-                // Hier können Sie die Bewertung und das Feedback verarbeiten
                 Toast.makeText(FeedbackActivity.this, "Bewertung: " + rating + "\nFeedback: " + feedback, Toast.LENGTH_SHORT).show();
             }
         });

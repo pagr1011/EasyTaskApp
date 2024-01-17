@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.app.e_business_easytask.Task;
 import com.app.e_business_easytask.entity.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,11 @@ public class TaskDataSource {
     public void openWritableDB() {
         database = dbHelper.getWritableDatabase();
     }
+
     public void open() {
         database = dbHelper.getWritableDatabase();
     }
+
     public void openReadableDB() {
         database = dbHelper.getReadableDatabase();
     }
@@ -59,6 +62,7 @@ public class TaskDataSource {
             Log.d("TaskDataSource", "Auftrag erfolgreich in die Datenbank eingefügt. ID: " + result);
         }
     }
+
     public void logAllTasks() {
         Cursor cursor = database.query("tasks", null, null, null, null, null, null);
 
@@ -178,7 +182,7 @@ public class TaskDataSource {
         return result;
     }
 
-    public Long insertDienstleister(String vorname, String nachname, String email, String passwort, String telefonnummer, String ort, String plz, String strasse, String hausnummer, String user_type, String verfuegbarkeit){
+    public Long insertDienstleister(String vorname, String nachname, String email, String passwort, String telefonnummer, String ort, String plz, String strasse, String hausnummer, String user_type, String verfuegbarkeit) {
 
         long id = insertBenutzer(vorname, nachname, email, passwort, telefonnummer, ort, plz, strasse, hausnummer, user_type);
 
@@ -375,10 +379,9 @@ public class TaskDataSource {
 
         return taskList;
     }
+
+    //Echtzeitsuche
     public List<Task> getRealTimeSearchResults(String search) {
-        // Implementieren Sie eine Methode, um in Echtzeit zu suchen
-        // Sie können hier die Logik für die Echtzeit-Suche hinzufügen
-        // Beispiel: Durchsuchen Sie eine Liste von Ergebnissen basierend auf dem aktuellen Suchbegriff
         List<Task> realTimeSearchResults = new ArrayList<>();
         for (Task task : allMockTasks) {
             if (task.getServiceType().toLowerCase().contains(search.toLowerCase())) {
@@ -387,6 +390,7 @@ public class TaskDataSource {
         }
         return realTimeSearchResults;
     }
+
     public List<Task> getSearchedMockTasks(String search) {
         List<Task> taskList = new ArrayList<>();
 

@@ -4,7 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class PasswordHasher {
 
-    // Diese Methode hashen das Passwort
+    // Diese Methode hasht das Passwort
     public static String hashPassword(String password) {
         String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
         return hashedPassword;

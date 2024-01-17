@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            // Extrahiere Daten aus dem Intent, wenn vorhanden
+            // Extrahiert Daten aus dem Intent, wenn vorhanden
             String receivedData = intent.getStringExtra("user_type");
             if (receivedData != null) {
                 user_type = receivedData;

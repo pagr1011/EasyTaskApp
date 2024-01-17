@@ -4,14 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.content.Intent;
 import android.widget.Button;
 
 import com.app.e_business_easytask.FeedbackActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +32,7 @@ public class SucheFragment extends Fragment {
     private TaskAdapter tasksAdapter;
     private TaskDataSource taskDataSource;
 
-    // Hier eine Liste für alle Mock-Ergebnisse erstellen
+    // Hier wird eine Liste für alle Mock-Ergebnisse erstellt
     private List<Task> allMockTasks;
 
     @Override

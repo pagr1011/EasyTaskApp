@@ -38,11 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         anmeldenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("LoginActivity","Anmeldeprozess gestartet");
+                Log.d("LoginActivity", "Anmeldeprozess gestartet");
                 String email = emailEditText.getText().toString();
                 String password = passwortEditText.getText().toString();
-
-                // Hier sollte die Logik für die Überprüfung von Benutzername und Passwort stehen
                 // Wenn die Überprüfung erfolgreich ist, starte die MainActivity
                 if (checkCredentials(email, password)) {
                     Log.d("LoginActivity", "Login erfolgreich");
